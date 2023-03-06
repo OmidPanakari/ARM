@@ -21,6 +21,6 @@ module InstructionFetch (
         if (rst)
             current_pc <= 32'd0;
         else    
-            current_pc <= next_pc;
+            current_pc <= (freeze) ? current_pc : next_pc;
     end
 endmodule
