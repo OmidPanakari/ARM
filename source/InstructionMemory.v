@@ -24,5 +24,5 @@ module InstructionMemory (
         mem[14] = 32'b1110_10_1_0_000000000000000000000000; // EOR
     end
     
-    assign instruction = mem[address];
+    assign instruction = mem[(address >> 2)];
 endmodule
