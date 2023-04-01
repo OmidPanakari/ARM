@@ -28,7 +28,6 @@ module IDReg (
     imm_out,
     signed_imm_out,
     dest_out,
-    flush_out,
     status_reg_data_out,
     pc_out
 );
