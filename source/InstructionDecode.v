@@ -15,6 +15,7 @@ module InstructionDecode (
     val_rm,
     imm_out,
     shift_operand,
+    signed_imm,
     dest,
     rn
 );
@@ -35,7 +36,7 @@ module InstructionDecode (
 
     wire imm, s, condition_check_out, mem_write_en;
     wire[1:0] mode;
-    wire[3:0] cond, op_code, rd. rm;
+    wire[3:0] cond, op_code, rd, rm;
     wire [8:0] controls;
 
 
@@ -43,7 +44,7 @@ module InstructionDecode (
     assign imm_out = imm;
     assign signed_imm = instruction[23:0];
     assign shift_operand = instruction[11:0];
-    assign mem_write_en = controls_out[6]
+    assign mem_write_en = controls_out[6];
     assign cond = instruction[31:28];
     assign op_code = instruction[24:21];
     assign s = instruction[20];
