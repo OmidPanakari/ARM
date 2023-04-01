@@ -8,8 +8,8 @@ module ControlUnit (
     input [1:0] mode;
     input [3:0] op_code;
     output [8:0] controls;
-    wire [3:0] alu_command;
-    wire mem_read, mem_write, b, status, wb_en;
+    reg [3:0] alu_command;
+    reg mem_read, mem_write, b, status, wb_en;
 
     always @(mode, op_code, s) begin
         {mem_read, mem_write, wb_en} = 3'd1;
@@ -35,16 +35,22 @@ module ControlUnit (
             6'b000001:
                 alu_command = 4'b1000;
             6'b001010:
+            begin
                 alu_command = 4'b0100;
                 wb_en = 1'b0;
+            end
             6'b001000:
+            begin
                 alu_command = 4'b0110;
                 wb_en = 1'b0;
+            end
             6'b010100:
+            begin
                 alu_command = 4'b0010;
                 mem_read = s;
                 mem_write = ~s;
                 wb_en = ~s;
+            end
             default:
                 alu_command = 4'b0000;
         endcase
