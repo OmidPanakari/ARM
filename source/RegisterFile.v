@@ -25,7 +25,7 @@ module RegisterFile (
             registers[WB_dest] <= WB_value;
         if (rst) begin
             for (i = 0; i < 16; i = i + 1) begin
-                registers[i] <= 32'd0;
+                registers[i] <= i;
             end
         end
     end
