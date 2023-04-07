@@ -45,20 +45,33 @@ module IDReg (
 
     //TODO: add flush
 
-    always @(posedge clk) begin
-        val_rm_out <= val_rm;
-        val_rn_out <= val_rn;
-        shift_operand_out <= shift_operand;
-        signed_imm_out <= signed_imm;
-        wb_en_out <= wb_en;
-        mem_read_out <= mem_read;
-        b_out <= b;
-        s_out <= s;
-        imm_out <= imm;
-        alu_command_out <= alu_command;
-        dest_out <= dest;
-        mem_write_out <= mem_write;
-        status_out <= status;
-        pc_out <= pc;
+    always @(posedge clk, posedge rst) begin
+        if (rst) begin
+            val_rm_out <= 32'd0;
+            val_rn_out <= 32'd0;
+            shift_operand_out <= 12'd0;
+            signed_imm_out <= 24'd0;
+            {wb_en_out, mem_read_out, mem_write_out, b_out, s_out, imm_out} <= 6'd0;
+            pc_out <= 32'd0;
+            alu_command_out <= 4'd0;
+            dest_out <= 4'd0;
+            status_out <= 4'd0;
+        end
+        else begin
+            val_rm_out <= val_rm;
+            val_rn_out <= val_rn;
+            shift_operand_out <= shift_operand;
+            signed_imm_out <= signed_imm;
+            wb_en_out <= wb_en;
+            mem_read_out <= mem_read;
+            b_out <= b;
+            s_out <= s;
+            imm_out <= imm;
+            alu_command_out <= alu_command;
+            dest_out <= dest;
+            mem_write_out <= mem_write;
+            status_out <= status;
+            pc_out <= pc;
+        end
     end
 endmodule
