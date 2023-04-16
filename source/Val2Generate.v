@@ -11,6 +11,11 @@ module Val2Generate (
     
     output reg [31:0] val2;
 
+    wire [1:0] shift;
+    wire [3:0] rotate_imm;
+    wire [4:0] shift_imm;
+    wire [7:0] immed8;
+
     assign immed8 = shift_operand[7:0];
     assign rotate_imm = shift_operand[11:8];
     assign shift = shift_operand[6:5];

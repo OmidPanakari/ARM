@@ -35,7 +35,7 @@ module ALU (
                 v = (val1[31] == ~val2[31] && val1[31] == ~alu_res[31]);
             end
             4'b0101: begin
-                {c, alu_res} = val1 - val2 - ~c_in;
+                {c, alu_res} = val1 - val2 - {31'd0, ~c_in};
                 v = (val1[31] == ~val2[31] && val1[31] == ~alu_res[31]);
             end
             4'b0110: alu_res = val1 & val2;

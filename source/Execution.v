@@ -30,7 +30,7 @@ module Execution (
     assign select = mem_write_en | mem_read_en;
     Val2Generate v2gen(select, val_rm, shift_operand, imm, val2);
     ALU alu(alu_command, status, val_rn, val2, alu_res, status_out);
-    assign branch_address = {{8{signed_imm[23]}}, signed_imm} << 2 + pc;
+    assign branch_address = ({{8{signed_imm[23]}}, signed_imm} << 2) + pc;
 
 
 endmodule

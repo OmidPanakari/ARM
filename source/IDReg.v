@@ -46,7 +46,7 @@ module IDReg (
     //TODO: add flush
 
     always @(posedge clk, posedge rst) begin
-        if (rst) begin
+        if (rst || flush) begin
             val_rm_out <= 32'd0;
             val_rn_out <= 32'd0;
             shift_operand_out <= 12'd0;

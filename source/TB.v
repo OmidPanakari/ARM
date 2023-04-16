@@ -6,7 +6,7 @@ module TB;
        rst = 1'b1;
        #10
        rst = 1'b0;
-       #1000
+       #10000
        $stop; 
     end
     TopLevel TL(clk, rst);

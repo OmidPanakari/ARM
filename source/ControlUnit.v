@@ -47,7 +47,7 @@ module ControlUnit (
                 alu_command = 4'b0010;
                 mem_read = s;
                 mem_write = ~s;
-                wb_en = ~s;
+                wb_en = s;
             end
             default:
                 alu_command = 4'b0000;

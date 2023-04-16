@@ -15,7 +15,8 @@ module InstructionDecode (
     shift_operand,
     signed_imm,
     dest,
-    rn
+    rn, 
+    mux_out
 );
     input clk, rst, hazard, wb_en;
     input [3:0] condition_check, wb_dest;
@@ -23,7 +24,7 @@ module InstructionDecode (
 
 
     output two_src, imm_out;
-    output [3:0] dest, rn;
+    output [3:0] dest, rn, mux_out;
     output [8:0] controls_out;
     output [11:0] shift_operand;
     output [23:0] signed_imm;
@@ -51,10 +52,11 @@ module InstructionDecode (
     assign rm = instruction[3:0];
     assign controls_out = (~condition_check_out | hazard) ? 9'd0 : controls;
     assign two_src = (~imm | mem_write_en);
+    assign mux_out = (mem_write_en) ? rd : rm;
 
 
     ConditionCheck conditionCheck(cond, condition_check, condition_check_out);
     ControlUnit controlUnit(mode, op_code, s, controls);
-    RegisterFile registerFile(clk, rst, rn, (mem_write_en ? rd : rm), wb_dest, wb_value, wb_en, val_rn, val_rm);
+    RegisterFile registerFile(clk, rst, rn, mux_out, wb_dest, wb_value, wb_en, val_rn, val_rm);
 
 endmodule

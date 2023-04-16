@@ -12,7 +12,7 @@ module ConditionCheck(
     assign c_wire = condition_check[1];
     assign v_wire = condition_check[0];
     assign out = result;
-    always @(cond) begin
+    always @(cond, condition_check) begin
         case (cond)
             4'd0: 
                 result = z_wire;
@@ -39,9 +39,9 @@ module ConditionCheck(
             4'd11:
                 result = n_wire != v_wire;
             4'd12:
-                result = ~z_wire & (v_wire == n_wire);
+                result = ~z_wire && (v_wire == n_wire);
             4'd13:
-                result = z_wire | (v_wire != n_wire);
+                result = z_wire || (v_wire != n_wire);
             default: 
                 result = 1'b1;
         endcase

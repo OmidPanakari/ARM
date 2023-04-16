@@ -10,7 +10,7 @@ module StatusReg (
 
     output reg [3:0] status_out;
 
-    always @(posedge clk, posedge rst) begin
+    always @(negedge clk, posedge rst) begin
         if (rst) begin
             status_out <= 4'd0;
         end
