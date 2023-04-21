@@ -21,13 +21,13 @@ module RegisterFile (
     assign val_Rm = registers[Rm];
 
     always @(negedge clk, posedge rst) begin
-        if (WB_en)
-            registers[WB_dest] <= WB_value;
         if (rst) begin
             for (i = 0; i < 16; i = i + 1) begin
                 registers[i] <= i;
             end
-        end
+        end	 
+        else if (WB_en)
+            registers[WB_dest] <= WB_value;
     end
 
 endmodule
