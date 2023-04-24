@@ -1,13 +1,14 @@
 module TB;
-    reg clk=1'b1, rst=1'b0;
+    reg clk=1'b1, rst=1'b0, forwarding_en=1'b0;
 
     always #5 clk = ~clk;
     initial begin
+       forwarding_en = 1'b0;
        rst = 1'b1;
        #10
        rst = 1'b0;
        #10000
        $stop; 
     end
-    TopLevel TL(clk, rst);
+    TopLevel TL(clk, rst, forwarding_en);
 endmodule

@@ -16,6 +16,8 @@ module IDReg (
     dest,
     flush,
     status,
+    src1,
+    src2,
     wb_en_out,
     mem_read_out,
     mem_write_out,
@@ -29,16 +31,18 @@ module IDReg (
     signed_imm_out,
     dest_out,
     status_out,
-    pc_out
+    pc_out,
+    src1_out,
+    src2_out
 );
     input clk, rst, wb_en, mem_read, b, s, imm, flush, mem_write;
-    input [3:0] alu_command, dest, status;
+    input [3:0] alu_command, dest, status, src1, src2;
     input [11:0] shift_operand;
     input [23:0] signed_imm;
     input [31:0] pc, val_rm, val_rn;
     
     output reg wb_en_out, mem_read_out, b_out, s_out, imm_out, mem_write_out;
-    output reg [3:0] alu_command_out, dest_out, status_out;
+    output reg [3:0] alu_command_out, dest_out, status_out, src1_out, src2_out;
     output reg [11:0] shift_operand_out;
     output reg [23:0] signed_imm_out;
     output reg [31:0] pc_out, val_rm_out, val_rn_out;
@@ -56,6 +60,7 @@ module IDReg (
             alu_command_out <= 4'd0;
             dest_out <= 4'd0;
             status_out <= 4'd0;
+            {src1_out, src2_out} <= 8'd0;
         end
 		  else if (flush) begin
             val_rm_out <= 32'd0;
@@ -67,6 +72,7 @@ module IDReg (
             alu_command_out <= 4'd0;
             dest_out <= 4'd0;
             status_out <= 4'd0;
+            {src1_out, src2_out} <= 8'd0;
         end
         else begin
             val_rm_out <= val_rm;
@@ -83,6 +89,8 @@ module IDReg (
             mem_write_out <= mem_write;
             status_out <= status;
             pc_out <= pc;
+            src1_out <= src1;
+            src2_out <= src2;
         end
     end
 endmodule
