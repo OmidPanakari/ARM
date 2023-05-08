@@ -1,6 +1,7 @@
 module MemReg (
     clk,
     rst,
+    freeze,
     wb_en,
     mem_read_en,
     alu_res,
@@ -12,7 +13,7 @@ module MemReg (
     value_out,
     dest_out
 );
-    input clk, rst, wb_en, mem_read_en;
+    input clk, rst, wb_en, mem_read_en, freeze;
     input [3:0] dest;
     input [31:0] alu_res, value;
     output reg wb_en_out, mem_read_en_out;
@@ -26,7 +27,7 @@ module MemReg (
             value_out <= 32'd0;
             dest_out <= 4'd0;
         end
-        else begin
+        else if(~freeze) begin
             wb_en_out <= wb_en;
             mem_read_en_out <= mem_read_en;
             alu_res_out <= alu_res;

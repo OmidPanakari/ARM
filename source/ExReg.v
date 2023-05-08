@@ -1,6 +1,7 @@
 module ExReg (
     clk,
     rst,
+    freeze,
     wb_en,
     mem_read_en,
     mem_write_en,
@@ -15,7 +16,7 @@ module ExReg (
     dest_out
 );
     input clk, rst;
-    input wb_en, mem_read_en, mem_write_en;
+    input wb_en, mem_read_en, mem_write_en, freeze;
     input [3:0] dest;
     input [31:0] alu_res, val_rm;
 
@@ -29,7 +30,7 @@ module ExReg (
             alu_res_out <= 32'd0;
             val_rm_out <= 32'd0;
         end
-        else begin
+        else if(~freeze) begin
             wb_en_out <= wb_en;
             mem_read_en_out <= mem_read_en;
             mem_write_en_out <= mem_write_en;

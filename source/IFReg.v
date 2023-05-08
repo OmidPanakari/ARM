@@ -18,10 +18,10 @@ module IFReg (
             pc_out <= 32'd0;
             instruction_out <= 32'd0;
         end
-		  else if (flush) begin
-				pc_out <= 32'd0;
-            instruction_out <= 32'd0;
-		  end
+        else if (flush) begin
+            pc_out <= 32'd0;
+        instruction_out <= 32'd0;
+        end
         else if(~freeze) begin
             pc_out <= pc_in;
             instruction_out <= instruction_in;

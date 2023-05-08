@@ -1,6 +1,7 @@
 module IDReg (
     clk,
     rst,
+    freeze,
     pc,
     wb_en,
     mem_read,
@@ -35,7 +36,7 @@ module IDReg (
     src1_out,
     src2_out
 );
-    input clk, rst, wb_en, mem_read, b, s, imm, flush, mem_write;
+    input clk, rst, wb_en, mem_read, b, s, imm, flush, mem_write, freeze;
     input [3:0] alu_command, dest, status, src1, src2;
     input [11:0] shift_operand;
     input [23:0] signed_imm;
@@ -74,7 +75,7 @@ module IDReg (
             status_out <= 4'd0;
             {src1_out, src2_out} <= 8'd0;
         end
-        else begin
+        else if(~freeze) begin
             val_rm_out <= val_rm;
             val_rn_out <= val_rn;
             shift_operand_out <= shift_operand;
