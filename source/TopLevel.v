@@ -27,11 +27,11 @@ module TopLevel (
         Ex_val_rm, val2;
 
     // IF
-    InstructionFetch IF(clk, rst, ID_b, freeze, branch_address, pc, instruction);
+    InstructionFetch IF(clk, rst, ID_b, (freeze || mem_freeze), branch_address, pc, instruction);
     IFReg IF_Reg(clk, rst, (freeze || mem_freeze), ID_b, pc, instruction, IF_pc, IF_instruction);
 
     // ID
-    InstructionDecode ID(clk, rst, freeze, Mem_dest, wb_value, Mem_wb_en, status_out, IF_instruction, two_src, controls, 
+    InstructionDecode ID(clk, rst, (freeze || mem_freeze), Mem_dest, wb_value, Mem_wb_en, status_out, IF_instruction, two_src, controls, 
         val_Rn, val_Rm, imm_out, shift_operand, signed_imm, dest, Rn, src2);
     IDReg ID_Reg(clk, rst, mem_freeze, IF_pc, controls[8], controls[7], controls[6], controls[5:2], controls[1], 
         controls[0], val_Rn, val_Rm, shift_operand, imm_out, signed_imm, dest, ID_b, status_out, Rn, src2, ID_wb_en,
